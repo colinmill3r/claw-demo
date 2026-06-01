@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codex Challenge Generator</title>
+
+<style>
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 24px;
+  text-align: center;
+}
+
+.challenge {
+  font-size: 28px;
+  line-height: 1.3;
+  margin: 40px 0;
+}
+
+button {
+  font-size: 18px;
+  padding: 16px 24px;
+  margin: 8px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Your Codex Challenge</h1>
+
+<div id="challenge" class="challenge"></div>
+
+<button id="newChallenge">
+Generate Another
+</button>
+
+<button id="openCodex">
+Open in Codex
+</button>
+
+<script>
+
+const prompts = [
+  "Create a browser game where a raccoon delivers pizza in space.",
+  "Build a website for a haunted bed and breakfast.",
+  "Create a cocktail recommendation quiz.",
+  "Build a retro arcade game using HTML, CSS, and JavaScript.",
+  "Create a music visualizer inspired by city lights.",
+  "Build a virtual pet that lives in the browser.",
+  "Create a personal website for a time traveler.",
+  "Build a simple productivity app for creative teams."
+];
+
+let currentPrompt = "";
+
+function generatePrompt() {
+  currentPrompt =
+    prompts[Math.floor(Math.random() * prompts.length)];
+
+  document.getElementById("challenge").innerText =
+    currentPrompt;
+}
+
+generatePrompt();
+
+document
+  .getElementById("newChallenge")
+  .addEventListener("click", generatePrompt);
+
+document
+  .getElementById("openCodex")
+  .addEventListener("click", () => {
+
+    const deepLink =
+      `codex://new?prompt=${encodeURIComponent(currentPrompt)}`;
+
+    window.location.href = deepLink;
+
+    setTimeout(() => {
+      window.open("https://chatgpt.com", "_blank");
+    }, 1200);
+
+  });
+
+</script>
+
+</body>
+</html>
